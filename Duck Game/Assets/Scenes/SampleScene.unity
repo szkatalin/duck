@@ -112,6 +112,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &126325179 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1137842775926166, guid: 82f6982e952607a4f90a2684afc45b9c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1798759853}
+--- !u!61 &126325180
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126325179}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.5, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.32, y: 0.29}
+  m_EdgeRadius: 0
+--- !u!50 &126325181
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126325179}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &169177455
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1066086805}
   - component: {fileID: 1066086806}
+  - component: {fileID: 1066086807}
   m_Layer: 0
   m_Name: GrassMid
   m_TagString: Untagged
@@ -505,6 +556,31 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!61 &1066086807
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1066086804}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.28, y: 1.28}
+  m_EdgeRadius: 0
 --- !u!1 &1083031225
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1083031226}
   - component: {fileID: 1083031227}
+  - component: {fileID: 1083031228}
   m_Layer: 0
   m_Name: GrassHillLeft
   m_TagString: Untagged
@@ -578,6 +655,35 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!60 &1083031228
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1083031225}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.61, y: 0.64}
+      - {x: -0.64, y: -0.61}
+      - {x: -0.64, y: -0.64}
+      - {x: 0.64, y: -0.64}
+      - {x: 0.64, y: 0.64}
 --- !u!1001 &1798759853
 Prefab:
   m_ObjectHideFlags: 0
@@ -587,11 +693,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4552611182775944, guid: 82f6982e952607a4f90a2684afc45b9c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.064
+      value: 0.039
       objectReference: {fileID: 0}
     - target: {fileID: 4552611182775944, guid: 82f6982e952607a4f90a2684afc45b9c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.51
+      value: 2.497
       objectReference: {fileID: 0}
     - target: {fileID: 4552611182775944, guid: 82f6982e952607a4f90a2684afc45b9c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -617,6 +723,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4552611182775944, guid: 82f6982e952607a4f90a2684afc45b9c, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 3.3416834
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552611182775944, guid: 82f6982e952607a4f90a2684afc45b9c, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 3.4944065
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 82f6982e952607a4f90a2684afc45b9c, type: 2}
   m_IsPrefabParent: 0
@@ -629,6 +743,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1827993129}
   - component: {fileID: 1827993130}
+  - component: {fileID: 1827993131}
   m_Layer: 0
   m_Name: GrassHillRight
   m_TagString: Untagged
@@ -693,6 +808,35 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!60 &1827993131
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1827993128}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.64, y: 0.64}
+      - {x: -0.64, y: -0.64}
+      - {x: 0.64, y: -0.64}
+      - {x: 0.64, y: -0.61}
+      - {x: -0.61, y: 0.64}
 --- !u!1 &1901067197
 GameObject:
   m_ObjectHideFlags: 0
