@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour {
 
     public float jumpSpeed;
 
+    public Transform groundCheck;
+    public float groundCheckedRadius;
+    public LayerMask whatIsGround; //mi is a föld
+
+    public bool isGrounded;
+
 	// Use this for initialization
 	void Start () {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -16,6 +22,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+           
+        //ellenőrzi, hogy a Ground-on van-e, ugrásnál kell!
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckedRadius, whatIsGround);
+
         //jobbra
 		if( Input.GetAxisRaw("Horizontal") > 0f)
         {
@@ -29,7 +39,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         //ugrás
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, jumpSpeed, 0f);
         }
