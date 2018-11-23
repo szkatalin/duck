@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-
+    /*
+     * Mozgáshoz tartozik
+     * */
     public float moveSpeed;
     private Rigidbody2D myRigidbody;
 
@@ -15,9 +17,16 @@ public class PlayerController : MonoBehaviour {
 
     public bool isGrounded;
 
+    /*
+     * Animációhoz tartozik
+     * */
+    private Animator myAnimator;
+
+
 	// Use this for initialization
 	void Start () {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -30,9 +39,11 @@ public class PlayerController : MonoBehaviour {
 		if( Input.GetAxisRaw("Horizontal") > 0f)
         {
             myRigidbody.velocity = new Vector3(moveSpeed, myRigidbody.velocity.y, 0f);
+            transform.localScale = new Vector3(3f, 3f, 3f);
         } else if (Input.GetAxisRaw("Horizontal") < 0f) //balra
         {
             myRigidbody.velocity = new Vector3(-moveSpeed, myRigidbody.velocity.y, 0f);
+            transform.localScale = new Vector3(-3f, 3f, 3f);
         } else
         {
             myRigidbody.velocity = new Vector3(0f, myRigidbody.velocity.y, 0f);
@@ -43,5 +54,8 @@ public class PlayerController : MonoBehaviour {
         {
             myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, jumpSpeed, 0f);
         }
+
+        //ugrás animációhoz, átadjuk mikor ér a földhöz
+        myAnimator.SetBool("Grounded", isGrounded);
     }
 }
