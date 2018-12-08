@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
 
     public bool isGrounded;
 
+    public Vector3 respawnPosition;
+    public LevelManager levelManager;
     /*
      * Animációhoz tartozik
      * */
@@ -27,6 +29,10 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+
+        respawnPosition = transform.position;
+
+        levelManager = FindObjectOfType<LevelManager>();
 	}
 	
 	// Update is called once per frame
@@ -57,5 +63,17 @@ public class PlayerController : MonoBehaviour {
 
         //ugrás animációhoz, átadjuk mikor ér a földhöz
         myAnimator.SetBool("Grounded", isGrounded);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "KillArea")
+        {
+            levelManager.Respawn();
+        }
+        if(other.tag == "Checkpoint")
+        {
+            respawnPosition = other.transform.position;
+        }
     }
 }
