@@ -6,6 +6,7 @@ TagManager:
   tags:
   - KillArea
   - Checkpoint
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
@@ -40,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Other Objects
+    uniqueID: 3122480937
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 1645202361
     locked: 0
