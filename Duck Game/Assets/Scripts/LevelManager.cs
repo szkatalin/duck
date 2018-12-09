@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
     public float timeUntilRespawn; // A halál és újraéledés közötti kis idő
     public PlayerController player;
@@ -11,16 +13,34 @@ public class LevelManager : MonoBehaviour {
 
     public int coinCount;
 
-	// Use this for initialization
-	void Start () {
-        player = FindObjectOfType<PlayerController>();
+    public Text coinsText;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public int actualHealth;
+    public int maxHealth;
+
+
+    private bool respawning;
+
+    // Use this for initialization
+    void Start()
+    {
+
+        player = FindObjectOfType<PlayerController>();
+        coinsText.text = "Coins: " + coinCount;
+
+        actualHealth = maxHealth;
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (actualHealth <= 0 && !respawning)
+        {
+            Respawn();
+            respawning = true;
+        }
+    }
 
     public void Respawn()
     {
@@ -35,6 +55,9 @@ public class LevelManager : MonoBehaviour {
 
         yield return new WaitForSeconds(timeUntilRespawn);
 
+        actualHealth = maxHealth;
+        respawning = false;
+        UpdateHealthMeter();
         player.transform.position = player.respawnPosition;
         player.gameObject.SetActive(true);
 
@@ -44,6 +67,33 @@ public class LevelManager : MonoBehaviour {
     public void AddCoins(int coinsToAdd)
     {
         coinCount += coinsToAdd;
+        coinsText.text = "Coins: " + coinCount;
     }
 
+    public void HurtPlayer(int dmg)
+    {
+        actualHealth -= dmg;
+        UpdateHealthMeter();
+    }
+
+    public void UpdateHealthMeter()
+    {
+        switch (actualHealth)
+        {
+            case 5:
+                return;
+            case 4:
+                return;
+            case 3:
+                return;
+            case 2:
+                return;
+            case 1:
+                return;
+            case 0:
+                return;
+            default:
+                return;
+        }
+    }
 }
