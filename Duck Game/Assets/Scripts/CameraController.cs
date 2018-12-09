@@ -11,18 +11,16 @@ public class CameraController : MonoBehaviour {
 
     public float smoothing;
 
-    public bool followTarget;
 
 	// Use this for initialization
 	void Start () {
-        followTarget = true;
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (followTarget)
-        {
+
         //transform.position - kameráé
 
                 targetPosition = new Vector3(target.transform.position.x, transform.position.y, transform.position.z);
@@ -40,8 +38,6 @@ public class CameraController : MonoBehaviour {
 
                 //Lerp - interpoláció from és to között, t arányban
                 transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing * Time.deltaTime);
-        }
-
 
         
 	}

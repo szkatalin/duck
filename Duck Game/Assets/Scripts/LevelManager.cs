@@ -42,12 +42,19 @@ public class LevelManager : MonoBehaviour
     {
 
         player = FindObjectOfType<PlayerController>();
-        coinsText.text = "Coins: " + coinCount;
+        
 
         actualHealth = maxHealth;
 
         objectsToReset = FindObjectsOfType<ResetOnRespawn>();
-        
+
+        if (PlayerPrefs.HasKey("CoinCount"))
+        {
+            coinCount = PlayerPrefs.GetInt("CoinCount");
+        }
+
+        coinsText.text = "Coins: " + coinCount;
+
     }
 
     // Update is called once per frame

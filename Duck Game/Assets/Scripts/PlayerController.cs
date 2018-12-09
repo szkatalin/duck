@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour {
 
     public float jumpSpeed;
 
-    //next levelhez
-    public bool canMove;
 
     public Transform groundCheck;
     public float groundCheckedRadius;
@@ -31,9 +29,7 @@ public class PlayerController : MonoBehaviour {
     private float knockBackCounter;
 
 
-    /*
-     * Animációhoz tartozik
-     * */
+    //animation
     private Animator myAnimator;
 
     //Sound
@@ -50,7 +46,6 @@ public class PlayerController : MonoBehaviour {
 
         levelManager = FindObjectOfType<LevelManager>();
 
-        canMove = true;
 	}
 	
 	// Update is called once per frame
@@ -59,7 +54,7 @@ public class PlayerController : MonoBehaviour {
         //ellenőrzi, hogy a Ground-on van-e, ugrásnál kell!
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckedRadius, whatIsGround);
 
-        if (knockBackCounter <= 0 && canMove)
+        if (knockBackCounter <= 0)
         {
             //jobbra
             if (Input.GetAxisRaw("Horizontal") > 0f)
