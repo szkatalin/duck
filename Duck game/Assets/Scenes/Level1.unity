@@ -222,6 +222,7 @@ MonoBehaviour:
   isGrounded: 0
   respawnPosition: {x: 0, y: 0, z: 0}
   levelManager: {fileID: 0}
+  stompBox: {fileID: 0}
   jumpSound: {fileID: 1265784960}
   hurtSound: {fileID: 2095656294}
 --- !u!95 &126325183
@@ -659,8 +660,12 @@ GameObject:
   m_Component:
   - component: {fileID: 352685348}
   - component: {fileID: 352685349}
-  - component: {fileID: 352685350}
   - component: {fileID: 352685352}
+  - component: {fileID: 352685354}
+  - component: {fileID: 352685353}
+  - component: {fileID: 352685351}
+  - component: {fileID: 352685350}
+  - component: {fileID: 352685355}
   m_Layer: 0
   m_Name: Fox
   m_TagString: Untagged
@@ -727,21 +732,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &352685350
-CircleCollider2D:
+--- !u!114 &352685350
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 352685347}
   m_Enabled: 1
-  m_Density: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da39fc47f545b94c802a7cc85e1174b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftPoint: {fileID: 1463215293}
+  rightPoint: {fileID: 1254101892}
+  moveSpeed: 3
+  rightFaced: 1
+--- !u!50 &352685351
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352685347}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.06}
-  serializedVersion: 2
-  m_Radius: 0.09
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!114 &352685352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -754,6 +779,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+--- !u!61 &352685353
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352685347}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.05}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.33, y: 0.32}
+    newSize: {x: 0.33, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.09}
+  m_EdgeRadius: 0
+--- !u!61 &352685354
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352685347}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.05}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.33, y: 0.32}
+    newSize: {x: 0.33, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.2}
+  m_EdgeRadius: 0
+--- !u!95 &352685355
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352685347}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 199c64274f4939940902677c1ca6b13b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &445480586
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,7 +1090,7 @@ MonoBehaviour:
   gem5: {fileID: 746789333}
   fullGem: {fileID: 21300000, guid: bd59bf2e866ed4529ae645637eb9c11d, type: 3}
   emptyGem: {fileID: 21300000, guid: de20f767e3f3f4aff870112daa2b2562, type: 3}
-  killedByFalling: 0
+  objectsToReset: []
 --- !u!1 &632425546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,7 +2465,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1769499359}
-  - component: {fileID: 1769499360}
   m_Layer: 0
   m_Name: Moving Fox
   m_TagString: Untagged
@@ -2396,21 +2488,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1769499360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1769499358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9e0472e93411354ea205519fb9e5f2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToMove: {fileID: 352685347}
-  startPointOfMoving: {fileID: 1463215293}
-  endPointOfMoving: {fileID: 1254101892}
-  movingSpeed: 2.5
 --- !u!1001 &1778011972
 Prefab:
   m_ObjectHideFlags: 0
