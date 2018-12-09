@@ -32,7 +32,8 @@ public class LevelManager : MonoBehaviour
     public Sprite emptyGem;
 
     private bool respawning;
-    public bool killedByFalling;
+
+    public ResetOnRespawn[] objectsToReset;
 
 
     // Use this for initialization
@@ -43,6 +44,8 @@ public class LevelManager : MonoBehaviour
         coinsText.text = "Coins: " + coinCount;
 
         actualHealth = maxHealth;
+
+        objectsToReset = FindObjectsOfType<ResetOnRespawn>();
         
     }
 
@@ -69,21 +72,28 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeUntilRespawn);
 
-        if (killedByFalling)
-        {
-            actualHealth -= 1;
-            killedByFalling = false;
-        }
-        else
-        {
-            actualHealth = maxHealth;
-        }
+        /*
+         * Vizsgálom, hogy esés miatt kell-e újraéledni, és hogy van-e
+         még élete, különben a teljes újraéledés és reset következik be.
+         */
+
+        actualHealth = maxHealth;
+
         respawning = false;
+
+        coinCount = 0;
+        coinsText.text = "Coins: " + coinCount;
 
         UpdateHealthMeter();
         player.transform.position = player.respawnPosition;
         player.gameObject.SetActive(true);
 
+
+        for (int i = 0; i < objectsToReset.Length; i++)
+        {
+            objectsToReset[i].gameObject.SetActive(true);
+            objectsToReset[i].ResetObject();
+        }
 
     }
 
