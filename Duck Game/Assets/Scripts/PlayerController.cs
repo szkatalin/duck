@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour {
 
     public float jumpSpeed;
 
+    //next levelhez
+    public bool canMove;
+
     public Transform groundCheck;
     public float groundCheckedRadius;
     public LayerMask whatIsGround; //mi is a föld
