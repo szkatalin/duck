@@ -7,7 +7,6 @@ TagManager:
   - KillArea
   - Checkpoint
   - MovingPlatform
-  - Enemy
   layers:
   - Default
   - TransparentFX
