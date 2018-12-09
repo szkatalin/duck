@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
      * Mozgáshoz tartozik
      * */
     public float moveSpeed;
-    private Rigidbody2D myRigidbody;
+    public Rigidbody2D myRigidbody;
 
     public float jumpSpeed;
 
@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour {
         respawnPosition = transform.position;
 
         levelManager = FindObjectOfType<LevelManager>();
+
+        canMove = true;
 	}
 	
 	// Update is called once per frame
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour {
         //ellenőrzi, hogy a Ground-on van-e, ugrásnál kell!
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckedRadius, whatIsGround);
 
-        if (knockBackCounter <= 0)
+        if (knockBackCounter <= 0 && canMove)
         {
             //jobbra
             if (Input.GetAxisRaw("Horizontal") > 0f)
