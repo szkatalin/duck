@@ -31,11 +31,16 @@ public class LevelManager : MonoBehaviour
     public Sprite fullGem;
     public Sprite emptyGem;
 
-    private bool respawning;
+    public bool respawning;
 
     public ResetOnRespawn[] objectsToReset;
 
     public bool invincible;
+
+
+    public Text livesText;
+    public int startingLives;
+    public int currentLives;
 
     // Use this for initialization
     void Start()
@@ -47,6 +52,10 @@ public class LevelManager : MonoBehaviour
         actualHealth = maxHealth;
 
         objectsToReset = FindObjectsOfType<ResetOnRespawn>();
+
+        currentLives = startingLives;
+
+        livesText.text = "Lives x " + currentLives;
         
     }
 
@@ -62,7 +71,17 @@ public class LevelManager : MonoBehaviour
 
     public void Respawn()
     {
-        StartCoroutine("RespawnCo");
+        currentLives -= 1;
+        livesText.text = "Lives x " + currentLives;
+
+        if (currentLives > 0)
+        {
+            StartCoroutine("RespawnCo");
+        }
+        else
+        {
+            player.gameObject.SetActive(false);
+        }
     }
 
     public IEnumerator RespawnCo()
@@ -72,11 +91,6 @@ public class LevelManager : MonoBehaviour
         Instantiate(AnimOnDeath, player.transform.position, player.transform.rotation);
 
         yield return new WaitForSeconds(timeUntilRespawn);
-
-        /*
-         * Vizsgálom, hogy esés miatt kell-e újraéledni, és hogy van-e
-         még élete, különben a teljes újraéledés és reset következik be.
-         */
 
         actualHealth = maxHealth;
 
@@ -173,5 +187,11 @@ public class LevelManager : MonoBehaviour
                 gem5.sprite = emptyGem;
                 return;
         }
+    }
+
+    public void AddLives(int lives)
+    {
+        currentLives += lives;
+        livesText.text = "Lives x " + currentLives; 
     }
 }
