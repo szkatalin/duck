@@ -15,6 +15,10 @@ public class LevelManager : MonoBehaviour
 
     public Text coinsText;
 
+    //Sounds
+    public AudioSource coinSound;
+    
+
     public int actualHealth;
     public int maxHealth;
 
@@ -87,12 +91,16 @@ public class LevelManager : MonoBehaviour
     {
         coinCount += coinsToAdd;
         coinsText.text = "Coins: " + coinCount;
+
+        coinSound.Play();
     }
 
     public void HurtPlayer(int dmg)
     {
         actualHealth -= dmg;
         UpdateHealthMeter();
+
+        player.hurtSound.Play();
     }
 
     public void UpdateHealthMeter()

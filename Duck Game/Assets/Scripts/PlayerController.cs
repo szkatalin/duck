@@ -24,9 +24,13 @@ public class PlayerController : MonoBehaviour {
      * */
     private Animator myAnimator;
 
+    //Sound
+    public AudioSource jumpSound;
+    public AudioSource hurtSound;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
 
@@ -59,6 +63,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, jumpSpeed, 0f);
+            jumpSound.Play();
         }
 
         //ugrás animációhoz, átadjuk mikor ér a földhöz
