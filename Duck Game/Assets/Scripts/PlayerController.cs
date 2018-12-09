@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour {
     {
         if(other.tag == "KillArea")
         {
+            levelManager.killedByFalling = true;
             levelManager.Respawn();
         }
         if(other.tag == "Checkpoint")

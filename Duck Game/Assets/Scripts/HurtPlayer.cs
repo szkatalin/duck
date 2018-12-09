@@ -6,6 +6,8 @@ public class HurtPlayer : MonoBehaviour {
 
     private LevelManager levelManager;
 
+    public int damage;
+
 	// Use this for initialization
 	void Start () {
         levelManager = FindObjectOfType<LevelManager>();
@@ -13,6 +15,7 @@ public class HurtPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		
 	}
 
@@ -20,7 +23,9 @@ public class HurtPlayer : MonoBehaviour {
     {
         if(collision.tag == "Player")
         {
-            levelManager.Respawn();
+            //levelManager.Respawn();
+
+            levelManager.HurtPlayer(damage);
         }    
     }
 
