@@ -25,6 +25,12 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject stompBox;
 
+    public float knockBackForce;
+    public float knockBackLength;
+
+    private float knockBackCounter;
+
+
     /*
      * Animációhoz tartozik
      * */
@@ -51,25 +57,46 @@ public class PlayerController : MonoBehaviour {
         //ellenőrzi, hogy a Ground-on van-e, ugrásnál kell!
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckedRadius, whatIsGround);
 
-        //jobbra
-		if( Input.GetAxisRaw("Horizontal") > 0f)
+        if (knockBackCounter <= 0)
         {
-            myRigidbody.velocity = new Vector3(moveSpeed, myRigidbody.velocity.y, 0f);
-            transform.localScale = new Vector3(3f, 3f, 3f);
-        } else if (Input.GetAxisRaw("Horizontal") < 0f) //balra
-        {
-            myRigidbody.velocity = new Vector3(-moveSpeed, myRigidbody.velocity.y, 0f);
-            transform.localScale = new Vector3(-3f, 3f, 3f);
-        } else
-        {
-            myRigidbody.velocity = new Vector3(0f, myRigidbody.velocity.y, 0f);
+            //jobbra
+            if (Input.GetAxisRaw("Horizontal") > 0f)
+            {
+                myRigidbody.velocity = new Vector3(moveSpeed, myRigidbody.velocity.y, 0f);
+                transform.localScale = new Vector3(3f, 3f, 3f);
+            }
+            else if (Input.GetAxisRaw("Horizontal") < 0f) //balra
+            {
+                myRigidbody.velocity = new Vector3(-moveSpeed, myRigidbody.velocity.y, 0f);
+                transform.localScale = new Vector3(-3f, 3f, 3f);
+            }
+            else
+            {
+                myRigidbody.velocity = new Vector3(0f, myRigidbody.velocity.y, 0f);
+            }
+
+            //ugrás
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, jumpSpeed, 0f);
+                jumpSound.Play();
+            }
+
+            levelManager.invincible = false;
         }
 
-        //ugrás
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if(knockBackCounter > 0)
         {
-            myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, jumpSpeed, 0f);
-            jumpSound.Play();
+            knockBackCounter -= Time.deltaTime;
+
+            if (transform.localScale.x > 0)
+            {
+                myRigidbody.velocity = new Vector3(-knockBackForce, knockBackForce, 0f);
+            }
+            else
+            {
+                myRigidbody.velocity = new Vector3(knockBackForce, knockBackForce, 0f);
+            }
         }
 
         //ugrás animációhoz, átadjuk mikor ér a földhöz
@@ -84,6 +111,14 @@ public class PlayerController : MonoBehaviour {
             stompBox.SetActive(false);
         }
     }
+
+    public void KnockBack()
+    {
+        knockBackCounter = knockBackLength;
+
+        levelManager.invincible = true;
+    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
