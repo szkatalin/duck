@@ -47,16 +47,18 @@ public class LevelManager : MonoBehaviour
     {
 
         player = FindObjectOfType<PlayerController>();
-        coinsText.text = "Coins: " + coinCount;
+        
 
         actualHealth = maxHealth;
+        coinsText.text = "Coins: " + coinCount;
 
         objectsToReset = FindObjectsOfType<ResetOnRespawn>();
-
+        
         currentLives = startingLives;
 
         livesText.text = "Lives x " + currentLives;
         
+
     }
 
     // Update is called once per frame
