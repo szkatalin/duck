@@ -18,8 +18,18 @@ public class LevelManager : MonoBehaviour
     public int actualHealth;
     public int maxHealth;
 
+    public Image gem1;
+    public Image gem2;
+    public Image gem3;
+    public Image gem4;
+    public Image gem5;
+
+    public Sprite fullGem;
+    public Sprite emptyGem;
 
     private bool respawning;
+    public bool killedByFalling;
+
 
     // Use this for initialization
     void Start()
@@ -39,7 +49,7 @@ public class LevelManager : MonoBehaviour
         {
             Respawn();
             respawning = true;
-        }
+        }        
     }
 
     public void Respawn()
@@ -55,8 +65,17 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeUntilRespawn);
 
-        actualHealth = maxHealth;
+        if (killedByFalling)
+        {
+            actualHealth -= 1;
+            killedByFalling = false;
+        }
+        else
+        {
+            actualHealth = maxHealth;
+        }
         respawning = false;
+
         UpdateHealthMeter();
         player.transform.position = player.respawnPosition;
         player.gameObject.SetActive(true);
@@ -81,18 +100,53 @@ public class LevelManager : MonoBehaviour
         switch (actualHealth)
         {
             case 5:
+                gem1.sprite = fullGem;
+                gem2.sprite = fullGem;
+                gem3.sprite = fullGem;
+                gem4.sprite = fullGem;
+                gem5.sprite = fullGem;
                 return;
             case 4:
+                gem1.sprite = fullGem;
+                gem2.sprite = fullGem;
+                gem3.sprite = fullGem;
+                gem4.sprite = fullGem;
+                gem5.sprite = emptyGem;
                 return;
             case 3:
+                gem1.sprite = fullGem;
+                gem2.sprite = fullGem;
+                gem3.sprite = fullGem;
+                gem4.sprite = emptyGem;
+                gem5.sprite = emptyGem;
                 return;
             case 2:
+                gem1.sprite = fullGem;
+                gem2.sprite = fullGem;
+                gem3.sprite = emptyGem;
+                gem4.sprite = emptyGem;
+                gem5.sprite = emptyGem;
                 return;
             case 1:
+                gem1.sprite = fullGem;
+                gem2.sprite = emptyGem;
+                gem3.sprite = emptyGem;
+                gem4.sprite = emptyGem;
+                gem5.sprite = emptyGem;
                 return;
             case 0:
+                gem1.sprite = emptyGem;
+                gem2.sprite = emptyGem;
+                gem3.sprite = emptyGem;
+                gem4.sprite = emptyGem;
+                gem5.sprite = emptyGem;
                 return;
             default:
+                gem1.sprite = fullGem;
+                gem2.sprite = fullGem;
+                gem3.sprite = fullGem;
+                gem4.sprite = emptyGem;
+                gem5.sprite = emptyGem;
                 return;
         }
     }
