@@ -223,6 +223,8 @@ MonoBehaviour:
   respawnPosition: {x: 0, y: 0, z: 0}
   levelManager: {fileID: 0}
   stompBox: {fileID: 2042603311}
+  knockBackForce: 5
+  knockBackLength: 0.5
   jumpSound: {fileID: 1265784960}
   hurtSound: {fileID: 2095656294}
 --- !u!95 &126325183
