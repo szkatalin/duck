@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour {
 
     public Vector3 respawnPosition;
     public LevelManager levelManager;
+
+    public GameObject stompBox;
+
     /*
      * Animációhoz tartozik
      * */
@@ -63,13 +66,21 @@ public class PlayerController : MonoBehaviour {
 
         //ugrás animációhoz, átadjuk mikor ér a földhöz
         myAnimator.SetBool("Grounded", isGrounded);
+
+        if(myRigidbody.velocity.y < 0)
+        {
+            stompBox.SetActive(true);
+        }
+        else
+        {
+            stompBox.SetActive(false);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "KillArea")
         {
-            levelManager.killedByFalling = true;
             levelManager.Respawn();
         }
         if(other.tag == "Checkpoint")
