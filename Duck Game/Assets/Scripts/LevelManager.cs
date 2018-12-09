@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
 
     public ResetOnRespawn[] objectsToReset;
 
+    public bool invincible;
 
     // Use this for initialization
     void Start()
@@ -107,10 +108,15 @@ public class LevelManager : MonoBehaviour
 
     public void HurtPlayer(int dmg)
     {
-        actualHealth -= dmg;
-        UpdateHealthMeter();
+        if (!invincible)
+        {
+            actualHealth -= dmg;
+            UpdateHealthMeter();
 
-        player.hurtSound.Play();
+            player.KnockBack();
+
+            player.hurtSound.Play();
+        }
     }
 
     public void UpdateHealthMeter()
