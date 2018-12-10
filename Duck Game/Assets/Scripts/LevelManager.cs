@@ -47,7 +47,6 @@ public class LevelManager : MonoBehaviour
     {
 
         player = FindObjectOfType<PlayerController>();
-        
 
         actualHealth = maxHealth;
         coinsText.text = "Coins: " + coinCount;
@@ -58,6 +57,10 @@ public class LevelManager : MonoBehaviour
 
         livesText.text = "Lives x " + currentLives;
         
+
+        currentLives = startingLives;
+
+        livesText.text = "Lives x " + currentLives;
 
     }
 
@@ -135,6 +138,12 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void AddLives(int lives)
+    {
+        currentLives += lives;
+        livesText.text = "Lives x " + currentLives;
+    }
+
     public void UpdateHealthMeter()
     {
         switch (actualHealth)
@@ -191,9 +200,4 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void AddLives(int lives)
-    {
-        currentLives += lives;
-        livesText.text = "Lives x " + currentLives; 
-    }
 }
