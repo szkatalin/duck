@@ -37,12 +37,15 @@ public class LevelManager : MonoBehaviour
 
     public bool invincible;
 
+    public Text livesText;
+    public int startingLives;
+    public int currentLives;
+
     // Use this for initialization
     void Start()
     {
 
         player = FindObjectOfType<PlayerController>();
-        
 
         actualHealth = maxHealth;
 
@@ -54,6 +57,10 @@ public class LevelManager : MonoBehaviour
         }
 
         coinsText.text = "Coins: " + coinCount;
+
+        currentLives = startingLives;
+
+        livesText.text = "Lives x " + currentLives;
 
     }
 
@@ -69,7 +76,17 @@ public class LevelManager : MonoBehaviour
 
     public void Respawn()
     {
-        StartCoroutine("RespawnCo");
+        currentLives -= 1;
+        livesText.text = "Lives x " + currentLives;
+
+        if (currentLives > 0)
+        {
+            StartCoroutine("RespawnCo");
+        }
+        else
+        {
+            player.gameObject.SetActive(false);
+        }
     }
 
     public IEnumerator RespawnCo()
@@ -124,6 +141,12 @@ public class LevelManager : MonoBehaviour
 
             player.hurtSound.Play();
         }
+    }
+
+    public void AddLives(int lives)
+    {
+        currentLives += lives;
+        livesText.text = "Lives x " + currentLives;
     }
 
     public void UpdateHealthMeter()
