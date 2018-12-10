@@ -31,12 +31,11 @@ public class LevelManager : MonoBehaviour
     public Sprite fullGem;
     public Sprite emptyGem;
 
-    public bool respawning;
+    private bool respawning;
 
     public ResetOnRespawn[] objectsToReset;
 
     public bool invincible;
-
 
     public Text livesText;
     public int startingLives;
@@ -49,14 +48,15 @@ public class LevelManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
 
         actualHealth = maxHealth;
-        coinsText.text = "Coins: " + coinCount;
 
         objectsToReset = FindObjectsOfType<ResetOnRespawn>();
-        
-        currentLives = startingLives;
 
-        livesText.text = "Lives x " + currentLives;
-        
+        if (PlayerPrefs.HasKey("CoinCount"))
+        {
+            coinCount = PlayerPrefs.GetInt("CoinCount");
+        }
+
+        coinsText.text = "Coins: " + coinCount;
 
         currentLives = startingLives;
 
@@ -96,6 +96,11 @@ public class LevelManager : MonoBehaviour
         Instantiate(AnimOnDeath, player.transform.position, player.transform.rotation);
 
         yield return new WaitForSeconds(timeUntilRespawn);
+
+        /*
+         * Vizsgálom, hogy esés miatt kell-e újraéledni, és hogy van-e
+         még élete, különben a teljes újraéledés és reset következik be.
+         */
 
         actualHealth = maxHealth;
 
@@ -199,5 +204,4 @@ public class LevelManager : MonoBehaviour
                 return;
         }
     }
-
 }
